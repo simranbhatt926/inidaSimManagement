@@ -1,6 +1,7 @@
 from django.db import models
 from operatorManagement.models import Operator
 
+
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateField(auto_now=True)

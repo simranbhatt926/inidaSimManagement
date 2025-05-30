@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+
+from datetime import timedelta
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +28,12 @@ SECRET_KEY = 'django-insecure-087ec#wk=37@69#k^tu1qdmwhsjzkq=uxy^3c2n#@0nem152(4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',
+    # ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'a31b-103-152-158-66.ngrok-free.app',  # Add this line
+]
 
 
 # Application definition
@@ -41,7 +48,11 @@ INSTALLED_APPS = [
     'indiaSimManagement',
     'countryManagement',
     'operatorManagement',
-   
+    'user',
+    'buildex',
+    'payment',
+    # 'rest_framework_simplejwt.token_blacklist',
+
 ]
 
 MIDDLEWARE = [
@@ -129,3 +140,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # ⏱️ 1 day access token
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),  # optional: 7 days for refresh token
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+}
+
+# add ngrok url
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://a31b-103-152-158-66.ngrok-free.app',  # Add this line
+]
